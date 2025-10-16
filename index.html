@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STS - Smart Testing Service</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+ <style>
+    :root {
+  --cream: #faf8f1;
+  --light-yellow: #faeab1;
+  --teal: #34656d;
+  --dark-teal: #334443;
+  --white: #ffffff;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --radius: 10px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--dark-teal);
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+/* Header */
+header {
+  background-color: var(--white);
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  height: 48px;
+  border-radius: 8px;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.logo-subtext {
+  font-size: 0.8rem;
+  color: var(--dark-teal);
+  letter-spacing: 1.5px;
+  font-weight: 400;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--dark-teal);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--teal);
+  transition: var(--transition);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(rgba(52, 101, 109, 0.85), rgba(51, 68, 67, 0.9)), url('https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+  color: var(--white);
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--light-yellow);
+  color: var(--dark-teal);
+  padding: 0.9rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background-color: #f5e19f;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Contact Bar */
+.contact-bar {
+  background-color: var(--teal);
+  color: var(--white);
+  padding: 0.75rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Main Content */
+.main {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-spacing {
+  margin-bottom: 5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.25rem;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  color: var(--dark-teal);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: var(--transition);
+  border-top: 4px solid var(--teal);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--teal);
+  background-color: var(--light-yellow);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: var(--transition);
+}
+
+.feature-card:hover .feature-icon {
+  background-color: var(--teal);
+  color: var(--light-yellow);
+}
+
+.feature-card h3 {
+  color: var(--dark-teal);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+/* Registration Section */
+.registration-section {
+  background-color: var(--white);
+  padding: 3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.registration-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.registration-step {
+  background-color: var(--cream);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--teal);
+}
+
+.step-number {
+  display: inline-block;
+  background-color: var(--teal);
+  color: var(--white);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.payment-info {
+  background-color: var(--light-yellow);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--cream);
+  padding: 1.2rem;
+  border-radius: var(--radius);
+  flex: 1;
+  min-width: 250px;
+}
+
+.contact-icon {
+  background-color: var(--teal);
+  color: var(--white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Testimonials */
+.testimonials {
+  background-color: var(--light-yellow);
+  padding: 4rem 2rem;
+  border-radius: var(--radius);
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--teal);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.author-info h4 {
+  color: var(--dark-teal);
+  margin-bottom: 0.2rem;
+}
+
+.author-info p {
+  color: var(--teal);
+  font-size: 0.9rem;
+}
+
+/* FAQ */
+.faq-section {
+  margin: 3rem 0;
+}
+
+.faq-item {
+  margin-bottom: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.faq-item:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.faq-question {
+  background-color: var(--white);
+  padding: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--dark-teal);
+  transition: var(--transition);
+}
+
+.faq-question:hover {
+  background-color: var(--light-yellow);
+}
+
+.faq-answer {
+  background-color: var(--white);
+  padding: 0 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.2s ease;
+}
+
+.faq-answer.active {
+  padding: 1.5rem;
+  max-height: 400px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-teal);
+  color: var(--white);
+  padding: 4rem 2rem 2rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-column h3 {
+  color: var(--light-yellow);
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--cream);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--light-yellow);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.social-link:hover {
+  background-color: var(--light-yellow);
+  color: var(--dark-teal);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .features, .testimonial-grid, .registration-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  nav ul {
+    gap: 1rem;
+  }
+  
+  .registration-section {
+    padding: 2rem;
+  }
+}
+ </style>
+</head>
+<body>
+  <div class="contact-bar">
+    Contact: info@sts.org | +92 300 1234567
+  </div>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="logo.jpg" alt="STS Logo" class="logo">
+        <div>
+          <div class="logo-text">SMART TESTING SERVICE</div>
+          <div class="logo-subtext">Excellence in Education</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Prepare. Practice. Perform.</h1>
+      <p>Online mock tests designed for MDCAT, ECAT, and more — train like the real exam.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuRSRTXi9VJaMnRmRzdOQqps6Gkm2zJt29KikLtRCQ1Ct9RA/viewform" target="_blank" class="btn">Register Now</a>
+      <a href="#registration" class="btn btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <section class="main">
+    <div class="section-spacing">
+      <div class="section-header fade-in">
+        <h2>Why Choose STS?</h2>
+        <p>We provide the most comprehensive test preparation platform with proven results</p>
+      </div>
+      <div class="features">
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Performance Analytics</h3>
+          <p>Detailed insights into your strengths and weaknesses with personalized recommendations.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>Real Exam Simulation</h3>
+          <p>Experience the actual test environment with timed sessions and similar interface.</p>
+        </div>
+        <div class="feature-card fade-in delay-3">
+          <div class="feature-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <h3>Comprehensive Content</h3>
+          <p>Access to thousands of questions curated by subject matter experts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-spacing" id="registration">
+      <div class="section-header fade-in">
+        <h2>STS MDCAT Mock 2025 – Self-Assessment Test</h2>
+        <p>Register now to secure your spot in the upcoming mock test</p>
+      </div>
+      <div class="registration-section">
+        <h3>📝 Registration Process</h3>
+        <div class="registration-steps">
+          <div class="registration-step fade-in delay-1">
+            <div class="step-number">1</div>
+            <h4>Fill Registration Form</h4>
+            <p>Complete the online registration form to reserve your spot</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuRSRTXi9VJaMnRmRzdOQqps6Gkm2zJt29KikLtRCQ1Ct9RA/viewform" target="_blank" class="btn">Register Now</a>
+          </div>
+          <div class="registration-step fade-in delay-2">
+            <div class="step-number">2</div>
+            <h4>Pay Registration Fee</h4>
+            <p>Pay the fee via Easypaisa / JazzCash / NayaPay</p>
+            <div class="payment-info">
+              <p><strong>Account Title:</strong> Sumair Ahmed</p>
+              <p><strong>Account No:</strong> 03043991520</p>
+            </div>
+          </div>
+          <div class="registration-step fade-in delay-3">
+            <div class="step-number">3</div>
+            <h4>Upload Payment Details</h4>
+            <p>Send your payment screenshot and details via WhatsApp</p>
+            <a href="https://wa.me/923160349077" target="_blank" class="btn">Upload on WhatsApp</a>
+          </div>
+        </div>
+        
+        <div class="section-spacing">
+          <h3>📞 Contact for Queries</h3>
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <h4>STS Official</h4>
+                <p>+92 316 0349077</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div>
+                <h4>Secondary Contact</h4>
+                <p>+92 317 3568095</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section-spacing">
+          <h3>👉 STS Official WhatsApp Channel</h3>
+          <p>Stay updated with the latest announcements and test schedules</p>
+          <a href="https://whatsapp.com/channel/0029Vb62ol54yltFkyhpwL0d" target="_blank" class="btn">Join WhatsApp Channel</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-spacing">
+      <div class="section-header fade-in">
+        <h2>Testimonials</h2>
+        <p>See what our successful students have to say about their experience</p>
+      </div>
+      <div class="testimonials">
+        <div class="testimonial-grid">
+          <div class="testimonial-card fade-in delay-1">
+            <div class="testimonial-text">
+              The mock tests were incredibly similar to the actual MDCAT. I felt prepared and confident on exam day thanks to STS.
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">SA</div>
+              <div class="author-info">
+                <h4>Sarah Ahmed</h4>
+                <p>Medical Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card fade-in delay-2">
+            <div class="testimonial-text">
+              The performance analytics helped me identify my weak areas and focus my preparation effectively.
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">AK</div>
+              <div class="author-info">
+                <h4>Ali Khan</h4>
+                <p>Engineering Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card fade-in delay-3">
+            <div class="testimonial-text">
+              The detailed solutions and explanations for each question made learning so much easier.
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">FR</div>
+              <div class="author-info">
+                <h4>Fatima Raza</h4>
+                <p>Medical Student</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-spacing">
+      <div class="section-header fade-in">
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to the most common questions about our services</p>
+      </div>
+      <div class="faq-section">
+        <div class="faq-item fade-in delay-1">
+          <div class="faq-question">
+            How similar are your mock tests to the actual exams?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Our tests are designed by experts who have extensive knowledge of the actual exam patterns. We continuously update our question bank to match the latest exam trends and formats, ensuring the closest possible simulation.
+          </div>
+        </div>
+        <div class="faq-item fade-in delay-2">
+          <div class="faq-question">
+            Can I access the tests on mobile devices?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Yes, our platform is fully responsive and works seamlessly on smartphones, tablets, and desktop computers. You can practice anytime, anywhere.
+          </div>
+        </div>
+        <div class="faq-item fade-in delay-3">
+          <div class="faq-question">
+            What payment methods do you accept?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            We accept payments through Easypaisa, JazzCash, bank transfers, and credit/debit cards. All transactions are secure and encrypted.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Smart Testing Service</h3>
+        <p>Providing quality test preparation services since 2015. Our mission is to help students achieve their academic goals through comprehensive practice and expert guidance.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Our Services</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> MDCAT Preparation</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> ECAT Preparation</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> SAT Preparation</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> University Entry Tests</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Career Counseling</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Education Street, Karachi</a></li>
+          <li><a href="#"><i class="fas fa-phone"></i> +92 300 1234567</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> info@sts.org</a></li>
+          <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 Smart Testing Service. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('active');
+        
+        const icon = question.querySelector('i');
+        if (answer.classList.contains('active')) {
+          icon.classList.remove('fa-chevron-down');
+          icon.classList.add('fa-chevron-up');
+        } else {
+          icon.classList.remove('fa-chevron-up');
+          icon.classList.add('fa-chevron-down');
+        }
+      });
+    });
+
+    // Scroll animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for scroll animation
+    document.querySelectorAll('.section-header, .feature-card, .registration-step, .testimonial-card, .faq-item').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
